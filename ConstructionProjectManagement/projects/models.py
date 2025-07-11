@@ -1,27 +1,18 @@
-# from django.db import models
-# from projects.choices import DevelopmentChoices
-#
-#
-# # Create your models here.
-# class Project(models.Model):
-#     title = models.CharField(max_length=300)
-#     content = models.TextField()
-#     coordinator = models.CharField(max_length=100)
-#     investor = models.CharField(max_length=100)
-#     date_start = models.DateField()
-#     development = models.CharField(max_length=50, choices=DevelopmentChoices.choices)
+from django.db import models
+from projects.choices import DevelopmentChoices
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-# class Task(models.Model):
-#     description = models.TextField()
-#     author = models.CharField(
-#         max_length=50,
-#     )
-#     date_approved = models.DateTimeField(auto_now_add=True)
-#     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tasks', blank=True, null=True)
+# Create your models here.
+class Project(models.Model):
+    title = models.CharField(max_length=300)
+    code_project = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(10)], default=0)
+    content = models.TextField()
+    coordinator = models.CharField(max_length=30)
+    investor = models.CharField(max_length=30)
+    date_start = models.DateField(blank=True, null=True)
+    development = models.CharField(max_length=50, choices=DevelopmentChoices.choices)
 
 
-# class Report(models.Model):
-#     answer = models.TextField()
-#     date_report = models.DateTimeField(auto_now=True)
+
 
