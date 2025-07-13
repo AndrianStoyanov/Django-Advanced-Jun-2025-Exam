@@ -21,7 +21,7 @@ UserModel = get_user_model()
 class NewAccountView(CreateView):
     model = UserModel
     form_class = AppUserCreationForm
-    template_name = 'accounts/register-page.html'
+    template_name = 'accounts/registration.html'
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
@@ -35,12 +35,12 @@ class NewAccountView(CreateView):
 
 
 def profile_details_view(request: Request, pk: int) -> HttpResponse:
-    return render(request, 'accounts/profile-details-page.html')
+    return render(request, 'accounts/profile-detail.html')
 
 
 class DetailProfileView(LoginRequiredMixin, DetailView):
     model = Profile
-    template_name = 'accounts/profile-details-page.html'
+    template_name = 'accounts/profile-detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -57,7 +57,7 @@ class DetailProfileView(LoginRequiredMixin, DetailView):
 class EditProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     form_class = ProfileEditForm
-    template_name = 'accounts/profile-edit-page.html'
+    template_name = 'accounts/profile-edit.html'
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
@@ -81,4 +81,4 @@ def delete_profile_view(request: HttpRequest, pk: int) -> HttpResponse:
     else:
         return HttpResponseForbidden()
 
-    return render(request, 'accounts/profile-delete-page.html')
+    return render(request, 'accounts/profile-delete.html')

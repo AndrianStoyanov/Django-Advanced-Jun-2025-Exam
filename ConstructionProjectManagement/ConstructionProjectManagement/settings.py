@@ -38,6 +38,7 @@ MY_APPS = [
     'builders',
     'designers',
     'supervisions'
+    'tasks'
 ]
 
 INSTALLED_APPS = [

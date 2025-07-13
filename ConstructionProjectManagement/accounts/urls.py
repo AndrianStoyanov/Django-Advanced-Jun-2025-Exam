@@ -6,7 +6,7 @@ from accounts import views
 
 urlpatterns = [
     path("register/", views.NewAccountView.as_view(), name='new-account'),
-    path("login/", LoginView.as_view(template_name='accounts/login-page.html'), name='login'),
+    path("login/", LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path("logout/", LogoutView.as_view(), name='logout'),
     path("profile/<int:pk>/", include([
         path('', views.DetailProfileView.as_view(), name='profile-details'),

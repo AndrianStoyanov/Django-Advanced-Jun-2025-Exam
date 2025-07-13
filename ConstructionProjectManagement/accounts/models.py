@@ -55,3 +55,7 @@ class Profile(models.Model):
     )
     position = models.CharField(max_length=100)
     company_job = models.CharField(max_length=70)
+
+    @property
+    def profiles_name(self):
+        return f"{self.first_name or ''}  {self.last_name or ''}"

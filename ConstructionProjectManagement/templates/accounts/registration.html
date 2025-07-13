@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+    <link rel="stylesheet"href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
+
+    <title>Registration</title>
+</head>
+<body>
+    <div class="container-form">
+        <header>
+            <div class="logo"><a href="#"><img src="/static/images/favicon.ico" height="60px" width="60px"></a></div>
+            <nav class="nav-top">
+                <div class="customer">
+                    <a href="#">Project</a>
+                    <a href="#">Create project</a>
+                </div>
+                <div class="profile">
+                    <a href="#" id="log"><i class="fa-solid fa-user"></i></a>
+                    <a href="#">Registration</a>
+                </div> 
+            </nav>
+        </header>
+        <main>
+            <article class="top">
+                <div class="form">
+                    <form class="register-form" method="" action="">
+                        <h2>Registration</h2>
+                        <div>
+                            <label for="id_company_name">Username:</label>
+                            <input type="text" name="company_name" maxlength="110" placeholder="Enter a company name..." required aria-describedby="id_company_name_helptext" id="id_company_name">
+                            <div class="helptext" id="id_company_name_helptext">*Allowed names contain letters, digits, spaces, and hyphens.</div></br>
+                        </div>
+                        <div>
+                            <label for="id_secret_key">Password:</label>
+                            <input type="password" name="secret_key" maxlength="4" placeholder="Enter a password" required aria-describedby="id_secret_key_helptext" id="id_secret_key">
+                            <div class="helptext" id="id_secret_key_helptext">Password a combination of less 8 digits, letter and symbol.</div></br>
+                        </div>
+                        <div>
+                            <label for="id_secret_key">Password Confirm :</label>
+                            <input type="password" name="secret_key" maxlength="4" placeholder="Confirm a password" required aria-describedby="id_secret_key_helptext" id="id_secret_key">
+                            <div class="helptext" id="id_secret_key_helptext">Password a combination of less 8 digits, letter and symbol.</div></br>
+                        </div>
+                        <button type="submit">Create</button>
+                    </form>
+                </div>
+            </article>
+        </main>
+        <footer>
+            <nav class="foot-top">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </nav>
+            <p>&copy; 2025 <span>Andrian Stoyanov</span> All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -14,11 +14,12 @@ class ReadOnlyFieldsMixin:
 
 
 class AbstractBaseMixin(models.Model):
+    company_name = models.CharField(max_length=110, validators=[MinLengthValidator(2), validate_name], unique=True)
+    permit = models.CharField(max_length=30)
+    contract = models.CharField(max_length=30)
+    budged = models.PositiveIntegerField()
+    phone_number = models.CharField(max_length=15, validators=[validator_phone], unique=True)
+    email = models.EmailField(validators=[EmailValidator()], unique=True)
+
     class Meta:
         abstract = True
-        company_name = models.CharField(max_length=110, validators=[MinLengthValidator(2), validate_name], unique=True)
-        permit = models.CharField(max_length=30)
-        contract = models.CharField(max_length=30)
-        budged = models.PositiveIntegerField()
-        phone_number = models.CharField(max_length=15, validators=[validator_phone], unique=True)
-        email = models.EmailField(validators=[EmailValidator()], unique=True)
