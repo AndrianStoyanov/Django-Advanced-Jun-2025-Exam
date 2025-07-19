@@ -12,9 +12,7 @@ from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 from accounts.forms import AppUserCreationForm, ProfileEditForm
 from accounts.models import Profile
 
-
 # Create your views here.
-
 UserModel = get_user_model()
 
 
@@ -34,24 +32,9 @@ class NewAccountView(CreateView):
         return response
 
 
-def profile_details_view(request: Request, pk: int) -> HttpResponse:
-    return render(request, 'accounts/profile-detail.html')
-
-
 class DetailProfileView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = 'accounts/profile-detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context['total_likes'] = self.object.user.photo_set.annotate(
-            num_likes=Count('like')
-        ).aggregate(total_likes=Sum('num_likes')).get('total_likes') or 0
-        context['pets_count'] = self.object.user.pet_set.count()
-        context['photos_count'] = self.object.user.photo_set.count()
-
-        return context
 
 
 class EditProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -71,14 +54,10 @@ class EditProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         )
 
 
-def delete_profile_view(request: HttpRequest, pk: int) -> HttpResponse:
-    user = UserModel.objects.get(pk=pk)
+class DeleteProfileView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Profile
+    template_name = 'accounts/profile-delete.html'
+    success_url = reverse_lazy('home')
 
-    if request.user.is_authenticated and request.user.pk == user.pk:
-        if request.method == "POST":
-            user.delete()
-            return redirect('home')
-    else:
-        return HttpResponseForbidden()
-
-    return render(request, 'accounts/profile-delete.html')
+    def test_func(self):
+        return self.request.user.pk == self.kwargs['pk']

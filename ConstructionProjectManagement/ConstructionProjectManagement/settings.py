@@ -37,8 +37,8 @@ MY_APPS = [
     'common',
     'builders',
     'designers',
-    'supervisions'
-    'tasks'
+    'supervisions',
+    'tasks',
 ]
 
 INSTALLED_APPS = [
@@ -80,10 +80,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ConstructionProjectManagement.wsgi.application'
 
-AUTHENTICATION_BACKENDS = [
-    'accounts.authentication.CustomAuthBackend',  # try to authenticate with email
-    'django.contrib.auth.backends.ModelBackend',  # fallback to authenticate with username
-]
+# AUTHENTICATION_BACKENDS = [
+    # 'accounts.authentication.CustomAuthBackend',  # try to authenticate with email
+    # 'django.contrib.auth.backends.ModelBackend',  # fallback to authenticate with username
+# ]
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -131,20 +131,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Sofia'
 
 USE_I18N = True
 
 USE_TZ = True
 
 # CSRF_COOKIE_SECURE = True  # only https sending
-CSRF_COOKIE_HTTPONLY = True   # can't get it with document.cookie
+# CSRF_COOKIE_HTTPONLY = True   # can't get it with document.cookie
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
@@ -156,5 +156,5 @@ MEDIA_ROOT = BASE_DIR / 'media_files'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.AppUser'
-LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
-LOGOUT_REDIRECT_URL = reverse_lazy('dashboard')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
