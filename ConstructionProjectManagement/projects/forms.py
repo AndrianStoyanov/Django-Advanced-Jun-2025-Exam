@@ -20,7 +20,7 @@ class ProjectBaseForm(forms.ModelForm):
         }
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Enter project name'}),
-            'code_project': forms.NumberInput(attrs={'placeholder': 'Enter code project'}),
+            'code_project': forms.TextInput(attrs={'placeholder': 'Enter code project'}),
             'content': forms.Textarea(attrs={'placeholder': 'Enter description'}),
             'coordinator': forms.TextInput(attrs={'placeholder': 'Enter coordinator'}),
             'investor': forms.TextInput(attrs={'placeholder': 'Enter investor control'}),

@@ -4,43 +4,33 @@
         <main>
                 <article class="top">
                     <div class="register-form form">
-                        <form class="" method="POST" action="{% url 'project-details' pro_pk %}">
-                            {% csrf_token %}
-                            {{ form }}
-{#                            <h2 class="project-details">Project details</h2>#}
-{#                            <h3 class="details-head">Project name</h3>#}
-{#                            <div class="context">Gazoprovod Europ Africa</div>#}
-{#                            <h3 class="project-head">Code project</h3>#}
-{#                            <div class="context">00123456</div>#}
-{#                            <h3 class="project-head">Descriptione</h3>#}
-{#                            <div class="context">DN 1400</div>#}
-{#                            <h3 class="project-head">Coordinator</h3>#}
-{#                            <div class="context">Maria Ivanova</div>#}
-{#                            <h3 class="project-head">Investor control</h3>#}
-{#                            <div class="context">Ivan Ivanov</div>#}
-{#                            <h3 class="project-head">Start project</h3>#}
-{#                            <div class="context">20.12.2022</div>#}
-{#                            <h3 class="project-head">Development</h3>#}
-{#                            <div class="context"> radio button</div>#}
+                        <form class="" method="GET" action="">
+                            <h2 class="project-details">Project details</h2>
+                            <h3 class="details-head">Project name:</h3>
+                            <div class="context">{{ project.title }}</div>
+                            <h3 class="project-head">Code project:</h3>
+                            <div class="context">{{ project.code_project }}</div>
+                            <h3 class="project-head">Description:</h3>
+                            <div class="context">{{ project.content }}</div>
+                            <h3 class="project-head">Coordinator:</h3>
+                            <div class="context">{{ project.coordinator }}</div>
+                            <h3 class="project-head">Investor control:</h3>
+                            <div class="context">{{ project.investor }}</div>
+                            <h3 class="project-head">Start project:</h3>
+                            <div class="context">{{ project.date_start|date:'d-m-Y' }}</div>
+                            <h3 class="project-head">Development:</h3>
+                            <div class="context">{{ project.development }}</div>
                             <div class="button">
-                                <button class="btn"><a href="{% url 'project-edit' pro_pk %}">Edit</a></button>
-                                <button class="btn"><a href="{% url 'project-delete' pro_pk %}">Delete</a></button>
+                                <button><a href="{% url 'project-edit' pro_pk=project.pk %}">Edit</a></button>
+                                <button><a href="{% url 'project-delete' pro_pk=project.pk %}">Delete</a></button>
                             </div>
                         </form>
-                        <h3 class="project-head">Budget</h3>
-                        <div class="context">50000 euro</div>
-                        <!-- <div class="contragent"> -->
-                        <a href="#" class="see-more project-head"><h3>Builders</h3></a>
-                            <!-- <div class="report-a"> -->
-                                <!-- <a href="#"><i class="fa-regular fa-trash-can"></i></a> -->
-                            <!-- </div> -->
-                        <!-- </div> -->
-                        <!-- <div class="context">Stroitel EAD</div> -->
-                        <a href="#" class="see-more project-head"><h3>Designers</h3></a>
-                        <!-- <div class="context">Proektant AD</div> -->
-                        <a href="#" class="see-more project-head"><h3>Supervisions</h3></a>
-                        <!-- <div class="context">DDZD Nadzor</div> -->
-                        <h3><a href="#" class="see-more project-head">Tasks</a></h3>
+                        <h3 class="project-head">Budget:</h3>
+                        <div class="context">{{total_budget_project|default:0}}</div>
+                        <a href="{% url 'builders' %}" class="see-more project-head"><h3>Builders</h3></a>
+                        <a href="{% url 'designers' %}" class="see-more project-head"><h3>Designers</h3></a>
+                        <a href="{% url 'supervisions' %}" class="see-more project-head"><h3>Supervisions</h3></a>
+                        <a href="#" class="see-more project-head"><h3>Tasks</h3></a>
                      </div>
                 </article>
         </main>

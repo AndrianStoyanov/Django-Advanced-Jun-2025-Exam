@@ -5,33 +5,19 @@
                 <article class="top">
                     <div class="register-form form">
                         <h2 class="project-details">Edit Project</h2>
-                        <form class="" method="POST" action="{% url 'project-edit' pro_pk %}">
+                        <form class="" method="POST" action="{% url 'project-edit' pro_pk=project.pk %}">
                             {% csrf_token %}
                             {{ form }}
-{#                            <h3 class="details-head">Project name</h3>#}
-{#                            <div class="context">Gazoprovod Europ Africa</div>#}
-{#                            <h3 class="project-head">Code project</h3>#}
-{#                            <div class="context">00123456</div>#}
-{#                            <h3 class="project-head">Descriptione</h3>#}
-{#                            <div class="context">DN 1400</div>#}
-{#                            <h3 class="project-head">Coordinator</h3>#}
-{#                            <div class="context">Maria Ivanova</div>#}
-{#                            <h3 class="project-head">Investor control</h3>#}
-{#                            <div class="context">Ivan Ivanov</div>#}
-{#                            <h3 class="project-head">Start project</h3>#}
-{#                            <div class="context">20.12.2022</div>#}
-{#                            <h3 class="project-head">Development</h3>#}
-{#                            <div class="context"> radio button</div>#}
                             <div class="button">
                                 <button type="submit">Edit</button>
                             </div>
                         </form>
                         <a href="#" class="see-more project-head"><h3>Edit Builder</h3></a>
-                        <div class="context">Stroitel EAD</div>
+                        <div class="context">{{ project.builders.all|join:', ' |default:'N/A'}}</div>
                         <a href="#" class="see-more project-head"><h3>Edit Designer</h3></a>
-                        <div class="context">Proektant AD</div>
+                        <div class="context">{{ project.designers.all|join:', ' |default:'N/A' }}</div>
                         <a href="#" class="see-more project-head"><h3>Edit Supervision</h3></a>
-                        <div class="context">DDZD Nadzor</div>
+                        <div class="context">{{ project.supervisions.all|join:', ' |default:'N/A' }}</div>
                     </div>
                 </article>
         </main>

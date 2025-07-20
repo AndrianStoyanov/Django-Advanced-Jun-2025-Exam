@@ -1,6 +1,6 @@
 from django.core.validators import MinLengthValidator, EmailValidator
 from django.db import models
-
+from django import forms
 from core.validators import validator_phone, validate_name
 
 
@@ -21,5 +21,30 @@ class AbstractBaseMixin(models.Model):
     phone_number = models.CharField(max_length=15, validators=[validator_phone], unique=True)
     email = models.EmailField(validators=[EmailValidator()], unique=True)
 
+    def __str__(self):
+        return self.company_name
+
     class Meta:
         abstract = True
+
+
+class ContractBaseForm(forms.ModelForm):
+    class Meta:
+        labels = {
+            'company_name': 'Company name:',
+            'permit': 'Permit:',
+            'contract': 'Contract:',
+            'budged': 'Budget:',
+            'phone_number': 'Phone Number:',
+            'email': 'Email:',
+            'document': 'Document upload:',
+        }
+        widgets = {
+            'company_name': forms.TextInput(attrs={'placeholder': 'Enter company name'}),
+            'permit': forms.TextInput(attrs={'placeholder': 'Enter permit number'}),
+            'contract': forms.Textarea(attrs={'placeholder': 'Enter contract number'}),
+            'budged': forms.NumberInput(attrs={'placeholder': 'Enter budget by euro'}),
+            'phone_number': forms.TextInput(attrs={'placeholder': 'Enter phone number start with +359'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter email'}),
+            'document': forms.FileInput(),
+        }

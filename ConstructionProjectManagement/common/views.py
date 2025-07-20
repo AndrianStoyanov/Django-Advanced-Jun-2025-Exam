@@ -16,7 +16,3 @@ class HomeView(TemplateView):
 class HomeExView(TemplateView):
     template_name = 'common/home-ex.html'
 
-
-class ProjectPageView(ListView):
-    model = Project
-    template_name = 'common/projects-page.html'

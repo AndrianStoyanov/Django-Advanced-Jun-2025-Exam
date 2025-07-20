@@ -80,10 +80,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ConstructionProjectManagement.wsgi.application'
 
-# AUTHENTICATION_BACKENDS = [
-    # 'accounts.authentication.CustomAuthBackend',  # try to authenticate with email
+AUTHENTICATION_BACKENDS = [
+    'accounts.authentication.CustomAuthBackend',  # try to authenticate with email
     # 'django.contrib.auth.backends.ModelBackend',  # fallback to authenticate with username
-# ]
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -148,7 +148,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media_files'
 
 # Default primary key field type

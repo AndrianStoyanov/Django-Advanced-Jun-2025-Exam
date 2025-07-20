@@ -25,6 +25,11 @@ urlpatterns = [
     path('common/', include('common.urls')),
     path('projects/', include('projects.urls')),
 
+    path('builders/', include('builders.urls')),
+
+    path('designers/', include('designers.urls')),
+    path('supervisions/', include('supervisions.urls')),
+
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <main>
+            <section class="project-all">
+                {% for project in project_list %}
+                    <article class="top">
+                            <div class="register-form form">
+                                <h2 class="project-details">Project {{ project.code_project }}</h2>
+                                <h3 class="project-head">Project name</h3>
+                                <div class="context">{{ project.title }}</div>
+                                <h3 class="project-head">Description</h3>
+                                <div class="context">{{ project.content }}</div>
+                                <h3 class="project-head">Builder</h3>
+                                <div class="context">{{ project.builders.all|join:', ' |default:'N/A' }}</div>
+                                <h3 class="project-head">Designer</h3>
+                                <div class="context">{{ project.designers.all|join:', ' |default:'N/A' }}</div>
+                                <h3 class="project-head">Supervision</h3>
+                                <div class="context">{{ project.supervisions.all|join:', ' |default:'N/A' }}</div>
+                                <a href="{% url 'project-details' pro_pk=project.pk %}" class="see-more">See more</a>
+                            </div>
+                    </article>
+                {% empty %}
+                <h3>No projects added</h3>
+                {% endfor %}
+            </section>
+        </main>
+{% endblock %}

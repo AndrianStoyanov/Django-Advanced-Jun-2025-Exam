@@ -4,18 +4,10 @@
         <main>
                 <article class="top">
                      <div class="register-form form">
-                        <form class="" method="POST" action="{% url 'project-delete' pro_pk %}">
+                        <form class="" method="POST" action="{% url 'project-delete' pro_pk=project.pk %}">
                             {% csrf_token %}
                             {{ form }}
-{#                            <h2 class="project-details">Delete Project</h2>#}
-{#                            <h3 class="details-head">Project name</h3>#}
-{#                            <div class="context">Gazoprovod Europ Africa</div>#}
-{#                            <h3 class="project-head">Code project</h3>#}
-{#                            <div class="context">00123456</div>#}
-{#                            <h3 class="project-head">Descriptione</h3>#}
-{#                            <div class="context">DN 1400</div>#}
-{#                            <h3 class="project-head">Development</h3>#}
-{#                            <div class="context"> radio button</div>#}
+                            <p> Are you sure so want to delete project?</p>
                             <div class="button">
                                 <button type="submit">Delete</button>
                             </div>

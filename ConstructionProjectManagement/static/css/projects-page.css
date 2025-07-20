@@ -228,7 +228,7 @@ li a{
     flex-direction: row;
     justify-content: left;
 }
-.button {
+.button, .btn > a {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -238,20 +238,24 @@ li a{
     gap: 10px;
 }
 
-.button button, .button .btn > a{
-  text-transform: uppercase;
-  outline: 0;
-  background: blue;
-  border: 0;
-  padding: 5px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 12px;
-  transition: background-color 0.2s ease, transform
+.button button, .button .btn > a, .button > button > a {
+    text-transform: uppercase;
+    outline: 0;
+    background: blue;
+    border: 0;
+    padding: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.2s ease, transform
 }
-.button button:hover, .button .btn > a:hover {
+.button > button > a, .button > button > a:hover {
+    text-decoration: none;
+}
+
+.button button:hover, .button .btn > a:hover, .button > button > a:hover {
   background: white;
   transform: scale(1.1);
   font-weight: 900;
