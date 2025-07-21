@@ -8,7 +8,7 @@
                          {% for builder in builder_list %}
                         <ul class="list">
                            <li>
-                               <a href="{% url 'builder-details' pk=builder.pk %}" class="see-more">Builder {{ builder.pk }}</a>
+                               <a href="{% url 'builder-details' pk=builder.pk %}" class="see-more">Builder: {{ builder.company_name }}</a>
                            </li>
                         </ul>
                          {% empty %}

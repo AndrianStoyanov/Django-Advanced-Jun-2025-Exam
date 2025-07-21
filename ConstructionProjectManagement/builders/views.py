@@ -4,7 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
-from builders.forms import BuilderBaseForm, BuilderEditForm, BuilderCreateForm
+from builders.forms import BuilderEditForm, BuilderCreateForm
 from builders.models import Builder
 
 

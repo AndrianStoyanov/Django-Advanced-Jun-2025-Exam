@@ -2,17 +2,17 @@
 {% load static %}
 {% block content %}
         <main>
-                <article class="top">
-                     <div class="register-form form">
-                        <form class="" enctype="multipart/form-data" method="POST" action="{% url 'builder-create' %}">
-                            <h2 class="project-details">Add Builder</h2>
-                            {% csrf_token %}
-                            {{ form }}
-                            <div class="button">
-                               <button type="submit">Add</button>
-                            </div>
-                        </form>
-                     </div>
-                </article>
+            <article class="top">
+                 <div class="register-form form">
+                    <form class="" enctype="multipart/form-data" method="POST" action="{% url 'builder-create' %}">
+                        <h2 class="project-details">Add Builder</h2>
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="button">
+                           <button type="submit">Add</button>
+                        </div>
+                    </form>
+                 </div>
+            </article>
         </main>
 {% endblock %}

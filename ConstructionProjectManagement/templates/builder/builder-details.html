@@ -3,27 +3,27 @@
 {% block content %}
 
         <main>
-                <article class="top">
-                     <div class="register-form form">
-                        <form class="" method="GET" action="">
-                            <h2 class="project-details">Builder details</h2>
-                            <h3 class="details-head">Company name:</h3>
-                            <div class="context">{{ builder.company_name }}</div>
-                            <h3 class="project-head">Permit</h3>
-                            <div class="context">{{ builder.permit }}</div>
-                            <h3 class="project-head">Contract:</h3>
-                            <div class="context">{{ builder.contract }}</div>
-                            <h3 class="project-head">Budget:</h3>
-                            <div class="context">{{ builder.budged }}lv</div>
-                            <h3 class="project-head">Phone number:</h3>
-                            <div class="context">+{{ builder.phone_number }}</div>
-                            <h3 class="project-head">Email:</h3>
-                            <div class="context">{{ builder.email }}</div>
-                        </form>
-                        <div class="button">
-                           <button><a href="{% url 'builder-edit' pk=builder.pk %}">Edit</a></button>
-                        </div>
-                     </div>
-                </article>
+            <article class="top">
+                 <div class="register-form form">
+                    <form class="" method="GET" action="">
+                        <h2 class="project-details">Builder details</h2>
+                        <h3 class="details-head">Company name:</h3>
+                        <div class="context">{{ builder.company_name }}</div>
+                        <h3 class="project-head">Permit:</h3>
+                        <div class="context">{{ builder.permit }}</div>
+                        <h3 class="project-head">Contract:</h3>
+                        <div class="context">{{ builder.contract }}</div>
+                        <h3 class="project-head">Budget:</h3>
+                        <div class="context">{{ builder.budged }}euro</div>
+                        <h3 class="project-head">Phone number:</h3>
+                        <div class="context">+{{ builder.phone_number }}</div>
+                        <h3 class="project-head">Email:</h3>
+                        <div class="context">{{ builder.email }}</div>
+                    </form>
+                    <div class="button">
+                       <button><a href="{% url 'builder-edit' pk=builder.pk %}">Edit</a></button>
+                    </div>
+                 </div>
+            </article>
         </main>
 {% endblock %}

@@ -1,5 +1,5 @@
-from django import forms
 
+from django import forms
 from builders.models import Builder
 from core.mixins import ReadOnlyFieldsMixin, ContractBaseForm
 from projects.models import Project

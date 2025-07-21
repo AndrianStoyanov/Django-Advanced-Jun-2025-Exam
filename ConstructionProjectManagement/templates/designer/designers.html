@@ -6,26 +6,17 @@
                 <article class="top">
                      <div class="register-form form">
                         <h2 class="project-details">Designers</h2>
+                         {% for designer in designer_list %}
                         <ul class="list">
                            <li>
-                               <a href="#" class="see-more">Designer 1</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Designer 2</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Designer 3</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Designer 4</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Designer 5</a>
+                               <a href="{% url 'designer-details' pk=designer.pk %}" class="see-more">Designer: {{ designer.company_name }}</a>
                            </li>
                         </ul>
+                         {% empty %}
                         <div class="project-head"><h3>No designers added</h3></div>
+                         {% endfor %}
                         <div class="button">
-                           <button type="submit">Add</button>
+                           <button><a href="{% url 'designer-create' %}">Add</a></button>
                         </div>
                      </div>
                 </article>

@@ -4,22 +4,10 @@
         <main>
                 <article class="top">
                      <div class="register-form form">
-                        <form class="" method="" action="">
+                        <form class="" enctype="multipart/form-data" method="POST" action="{% url 'supervision-edit' pk=supervision.pk %}">
                             <h2 class="project-details">Edit Supervision</h2>
-                            <h3 class="details-head">Company name</h3>
-                            <div class="context">GazMake</div>
-                            <h3 class="project-head">License</h3>
-                            <div class="context">1400-1254</div>
-                            <h3 class="project-head">Contrag</h3>
-                            <div class="context">125 / 12.12.2022</div>
-                            <h3 class="project-head">Budget</h3>
-                            <div class="context">10000 lv</div>
-                            <h3 class="project-head">Phone number</h3>
-                            <div class="context">+359 555 123456</div>
-                            <h3 class="project-head">Email</h3>
-                            <div class="context">aab@sca.com</div>
-                            <h3 class="project-head">Upload file</h3>
-                            <div class="context">nnnnnn</div>
+                            {% csrf_token %}
+                            {{ form }}
                             <div class="button">
                                <button type="submit">Edit</button>
                             </div>

@@ -2,31 +2,22 @@
 {% load static %}
 {% block content %}
        <main>
-                <article class="top">
-                     <div class="register-form form">
-                        <h2 class="project-details">Supervisions</h2>
-                        <ul class="list">
-                           <li>
-                               <a href="#" class="see-more">Supervision 1</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Supervision 2</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Supervision 3</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Supervision 4</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Supervision 5</a>
-                           </li>
-                        </ul>
-                        <div class="project-head"><h3>No supervisions added</h3></div>
-                        <div class="button">
-                           <button type="submit">Add</button>
-                        </div>
-                     </div>
-                </article>
+            <article class="top">
+                 <div class="register-form form">
+                    <h2 class="project-details">Supervisions</h2>
+                     {% for supervision in supervision_list %}
+                    <ul class="list">
+                       <li>
+                           <a href="{% url 'supervision-details' pk=supervision.pk %}" class="see-more">Supervision: {{ supervision.company_name}}</a>
+                       </li>
+                    </ul>
+                     {% empty %}
+                    <div class="project-head"><h3>No supervisions added</h3></div>
+                     {% endfor %}
+                    <div class="button">
+                       <button><a href="{% url 'supervision-create' %}">Add</a></button>
+                    </div>
+                 </div>
+            </article>
         </main>
 {% endblock %}
