@@ -24,7 +24,6 @@ class NewAccountView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        # Note: Signal for profile creation
 
         if response.status_code in [301, 302]:
             login(self.request, self.object)
