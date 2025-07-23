@@ -35,7 +35,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     user = models.OneToOneField(
         AppUser,
-        on_delete=models.CASCADE, primary_key=True, related_name='profiles',
+        on_delete=models.CASCADE, primary_key=True, related_name='profile',
     )
     first_name = models.CharField(
         max_length=30,
@@ -53,8 +53,8 @@ class Profile(models.Model):
         blank=True,
         null=True,
     )
-    position = models.CharField(max_length=100)
-    company_job = models.CharField(max_length=70)
+    position = models.CharField(max_length=100, blank=True, null=True)
+    company_job = models.CharField(max_length=70, blank=True, null=True)
 
     @property
     def profiles_name(self):

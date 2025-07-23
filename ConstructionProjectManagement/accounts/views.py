@@ -1,15 +1,9 @@
-# from lib2to3.fixes.fix_input import context
-from urllib.request import Request
-
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.db.models import Count, Sum
-from django.http import HttpResponse, HttpRequest, HttpResponseForbidden
-from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
-from accounts.forms import AppUserCreationForm, ProfileEditForm
+from accounts.forms import AppUserCreationForm, ProfileEditForm, ProfileDeleteForm
 from accounts.models import Profile
 
 # Create your views here.
@@ -29,20 +23,30 @@ class NewAccountView(CreateView):
             login(self.request, self.object)
 
         return response
+    # signals
 
 
 class DetailProfileView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = 'accounts/profile-detail.html'
+    pk_url_kwarg = 'pk'
 
 
 class EditProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     form_class = ProfileEditForm
     template_name = 'accounts/profile-edit.html'
+    pk_url_kwarg = 'pk'
 
     def test_func(self):
-        return self.request.user.pk == self.kwargs['pk']
+        profile_object = self.get_object()
+        return self.request.user == profile_object.user
+        # return self.request.user.pk == self.kwargs['pk']
+
+    def get_context_data(self, **kwargs):
+        profile = self.get_object()
+        kwargs.update({'profile': profile})
+        return super().get_context_data(**kwargs)
 
     def get_success_url(self) -> str:
         return reverse(
@@ -57,6 +61,18 @@ class DeleteProfileView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Profile
     template_name = 'accounts/profile-delete.html'
     success_url = reverse_lazy('home')
+    form_class = ProfileDeleteForm
+    pk_url_kwarg = 'pk'
 
     def test_func(self):
-        return self.request.user.pk == self.kwargs['pk']
+        profile_object = self.get_object()
+        return self.request.user == profile_object.user
+        # return self.request.user.pk == self.kwargs['pk']
+
+    def get_initial(self) -> dict:
+        return self.object.__dict__
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({"data": self.get_initial()})
+        return kwargs

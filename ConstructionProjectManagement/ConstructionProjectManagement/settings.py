@@ -14,6 +14,8 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,13 +34,14 @@ ALLOWED_HOSTS = []
 
 # Application definition
 MY_APPS = [
-    'accounts',
+    'accounts.apps.AccountsConfig',
     'projects',
     'common',
     'builders',
     'designers',
     'supervisions',
     'tasks',
+
 ]
 
 INSTALLED_APPS = [
@@ -48,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ] + MY_APPS
 
 MIDDLEWARE = [

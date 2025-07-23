@@ -1,76 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
-    <link rel="stylesheet"href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
-
-    <title>Profile Edit</title>
-</head>
-<body class="all-proj">
-    <div class="container-form">
-        <header>
-            <div class="logo"><a href="#"><img src="/static/images/favicon.ico" height="60px" width="60px"></a></div>
-            <nav class="nav-top">
-                <div class="customer">
-                    <a href="#">Project</a>
-                    <a href="#">Create project</a>
-                </div>
-                <div class="profile">
-                    <a href="#" id="log"><i class="fa-solid fa-user"></i></a>
-                    <a href="#">Registration</a>
-                </div> 
-            </nav>
-        </header>
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
         <main>
             <article class="top">
-                <div class="form">
-                    <form class="register-form" method="" action="">
-                        <h2>Profile Edit</h2>
-                        <div>
-                            <label for="id_first_name">First name:</label>
-                            <input type="text" name="first_name" maxlength="110" required aria-describedby="id_first_name_helptext" id="id_first_name">
-                            <div class="helptext" id="id_first_name_helptext">*Allowed names contain letters, spaces, and hyphens.</div></br>
+                <div class="register-form form">
+                    <form class="" method="POST" action="{% url 'profile-edit' pk=request.user.profile.pk  %}">
+                        <h2 class="project-details">Profile Edit on {{ request.user.username }}</h2>
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="button">
+                            <button type="submit">Edit</button>
                         </div>
-                        <div>
-                            <label for="id_last_name">Last name:</label>
-                            <input type="text" name="last_name" maxlength="110" required aria-describedby="id_last_name_helptext" id="id_last_name">
-                            <div class="helptext" id="id_last_name_helptext">*Allowed names contain letters, spaces, and hyphens.</div></br>
-                        </div>
-                        <div>
-                            <label for="id_photo">Profile profile:</label>
-                            <input type="image" name="photo" maxlength="110" required aria-describedby="id_photo_helptext" id="id_photo">
-                            <div class="helptext" id="id_photo_helptext">*The file must to be less or equel to 5MB.</div></br>
-                        </div>
-                        <div>
-                            <label for="id_position">Position:</label>
-                            <input type="text" name="position" maxlength="110" required aria-describedby="id_position_helptext" id="id_position">
-                            <div class="helptext" id="id_position_helptext">*Allowed names contain letters, spaces, and hyphens.</div></br>
-                        </div>
-                        <div>
-                            <label for="id_company">Company:</label>
-                            <input type="text" name="company" maxlength="110" required aria-describedby="id_company_helptext" id="id_company">
-                            <div class="helptext" id="id_company_helptext">*Allowed names contain letters, spaces, and hyphens.</div></br>
-                        </div>
-                        <button type="submit">Edit</button>
                     </form>
                 </div>
             </article>
         </main>
-        <footer>
-            <nav class="foot-top">
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            </nav>
-            <p>&copy; 2025 <span>Andrian Stoyanov</span> All rights reserved.</p>
-        </footer>
-    </div>
-</body>
-</html>
+{% endblock %}

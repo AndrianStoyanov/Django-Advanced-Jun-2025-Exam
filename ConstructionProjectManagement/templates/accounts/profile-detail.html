@@ -1,79 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
-    <link rel="stylesheet"href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
-
-    <title>Profile Detail</title>
-</head>
-<body class="all-proj">
-    <div class="container-form">
-        <header>
-            <div class="logo"><a href="#"><img src="/static/images/favicon.ico" height="60px" width="60px"></a></div>
-            <nav class="nav-top">
-                <div class="customer">
-                    <a href="#">Project</a>
-                    <a href="#">Create project</a>
-                </div>
-                <div class="profile">
-                    <a href="#" id="log"><i class="fa-solid fa-user"></i></a>
-                    <a href="#">Registration</a>
-                </div> 
-            </nav>
-        </header>
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
         <main>
             <article class="top">
-                <div class="form">
-                    <form class="register-form" method="" action="">
-                        <h2>Profile Detail</h2>
-                        <div>
-                            <label for="id_first_name">First name:</label>
-                            <input type="text" name="first_name" maxlength="110" placeholder="Enter a first name..." required aria-describedby="id_first_name_helptext" id="id_first_name">
-                            <div class="helptext" id="id_first_name_helptext">*Allowed names contain letters, spaces, and hyphens.</div></br>
-                        </div>
-                        <div>
-                            <label for="id_last_name">Last name:</label>
-                            <input type="text" name="last_name" maxlength="110" placeholder="Enter a last name..." required aria-describedby="id_last_name_helptext" id="id_last_name">
-                            <div class="helptext" id="id_last_name_helptext">*Allowed names contain letters, spaces, and hyphens.</div></br>
-                        </div>
-                        <div>
-                            <label for="id_photo">Profile profile:</label>
-                            <input type="image" name="photo" maxlength="110" placeholder="Upload a photo..." required aria-describedby="id_photo_helptext" id="id_photo">
-                            <div class="helptext" id="id_photo_helptext">*The file must to be less or equel to 5MB.</div></br>
-                        </div>
-                        <div>
-                            <label for="id_position">Position:</label>
-                            <input type="text" name="position" maxlength="110" placeholder="Enter a position..." required aria-describedby="id_position_helptext" id="id_position">
-                            <div class="helptext" id="id_position_helptext">*Allowed names contain letters, spaces, and hyphens.</div></br>
-                        </div>
-                        <div>
-                            <label for="id_company">Company:</label>
-                            <input type="text" name="company" maxlength="110" placeholder="Enter a company..." required aria-describedby="id_company_helptext" id="id_company">
-                            <div class="helptext" id="id_company_helptext">*Allowed names contain letters, spaces, and hyphens.</div></br>
-                        </div>
+                <div class="register-form form">
+                    <form class="" method="GET" action="">
+                        <h2 class="project-details">Profile Detail on {{ request.user.username }}</h2>
+                        <h3 class="details-head">First Name:</h3>
+                        <div class="context">{{ request.user.profile.first_name }}</div>
+                        <h3 class="project-head">Last name:</h3>
+                        <div class="context">{{ request.user.profile.last_name }}</div>
+                        <h3 class="project-head">Profile Picture:</h3>
+                        <div class="context">{{ request.user.profile.profile_picture }}</div>
+                        <h3 class="project-head">Position:</h3>
+                        <div class="context">{{ request.user.profile.position }}</div>
+                        <h3 class="project-head">Company:</h3>
+                        <div class="context">{{ request.user.profile.company_job }}</div>
                         <div class="button">
-                            <button type="submit">Edit</button>
-                            <button type="submit">Delete</button>
+                            <button><a href="{% url 'profile-edit' pk=request.user.profile.pk %}">Edit</a></button>
+                            <button><a href="{% url 'profile-delete' pk=request.user.profile.pk %}">Delete</a></button>
                         </div>
                     </form>
                 </div>
             </article>
         </main>
-        <footer>
-            <nav class="foot-top">
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            </nav>
-            <p>&copy; 2025 <span>Andrian Stoyanov</span> All rights reserved.</p>
-        </footer>
-    </div>
-</body>
-</html>
+{% endblock %}

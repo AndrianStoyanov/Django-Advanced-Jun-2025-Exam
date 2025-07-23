@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from accounts.models import Profile
+from core.mixins import ReadOnlyFieldsMixin
 
 UserModel = get_user_model()
 
@@ -26,8 +27,27 @@ class AppUserChangeForm(UserChangeForm):
 class ProfileBaseForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = "__all__"
+        exclude = ('user',)
+        labels = {
+            'first_name': 'First Name',
+            'last_name': 'Last Name',
+            'profile_picture': 'Profile Picture:',
+            'position': 'Position:',
+            'company_job': 'Company:',
+        }
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'Enter a first name...'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Enter a last name...'}),
+            'profile_picture': forms.URLInput(attrs={'placeholder': 'Upload a photo...'}),
+            'position': forms.TextInput(attrs={'placeholder': 'Enter a position...'}),
+            'company_job': forms.TextInput(attrs={'placeholder': 'Enter a company...'}),
+        }
 
 
 class ProfileEditForm(ProfileBaseForm):
-    ...
+    pass
+
+
+class ProfileDeleteForm(ReadOnlyFieldsMixin, ProfileBaseForm):
+    pass

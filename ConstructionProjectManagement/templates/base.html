@@ -34,7 +34,9 @@
                             <button class="logout" type="submit">
                                 Log out
                             </button>
+                            <a href="{% url 'profile-details' pk=user.pk %}" class="logout" style="text-decoration: none">My profile</a>
                         </form>
+
                     {% else %}
                         <a href="{% url 'login' %}" id="login-link">Log in</a>
                         <a href="{% url 'new-account' %}">Registration</a>
@@ -44,14 +46,6 @@
         </header>
         {% block content %}
         {% endblock %}
-{#        <main>#}
-{#            <article class="top">#}
-{#                <h3>Modern construction</h3>#}
-{#                <h2>Fast, technological and high quality</h2>#}
-{#                <h2>AnS since 1969</h2>#}
-{#                <a href="#">Learn More</a>#}
-{#            </article>#}
-{#        </main>#}
         <footer>
             <nav class="foot-top">
                 <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
