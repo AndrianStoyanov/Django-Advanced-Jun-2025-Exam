@@ -125,12 +125,12 @@ transform: scale(1.1);
     margin: 15px;
 }
 .register-form {
-    padding: 0;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: auto;
+    min-width: 100px;
 }
 .project-all {
     display: flex;

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <main>
+                <article class="top">
+                     <div class="register-form form">
+                        <form class="" method="GET" action="">
+                            <h3 class="project-head">Report detail</h3>
+                            <div class="context">
+                                <p class="content-p">{{ report.answer }}</p>
+                                <p class="author">Reporter: {{ report.reporter.profile.profiles_name }} Position: {{ report.reporter.profile.position }}</p>
+                                <p class="author">Company: {{ report.reporter.profile.company_job }} Reported at {{ report.date_report|date:'d-m-Y' }}</p>
+                                <div class="report-a">
+                                    <a href="{% url 'report-edit' rep_pk=report.pk %}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a href="{% url 'report-delete' rep_pk=report.pk %}"><i class="fa-regular fa-trash-can"></i></a>
+                               </div>
+                            </div>
+                        </form>
+                     </div>
+                </article>
+        </main>
+{% endblock %}

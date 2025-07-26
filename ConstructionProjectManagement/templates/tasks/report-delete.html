@@ -4,13 +4,10 @@
         <main>
                 <article class="top">
                      <div class="register-form form">
-                        <form class="" method="" action="">
+                        <form class="" method="POST" action="{% url 'report-delete' rep_pk=report.pk %}">
                             <h3 class="project-head">Delete Report</h3>
-                            <div class="context">
-                                <p class="content-p">This is report hkhkkkhkhhkhk oioiuouou[09klj poiupoioiikjk</p>
-                                <p class="author">Reporter: Ivan Ivanov Position: Technical manager</p>
-                                <p class="author">Company: Stroitel AD Reported at 22.2.2024 15:30</p>
-                            </div>
+                            {% csrf_token %}
+                            {{ form }}
                             <div class="button">
                                <button type="submit">Delete</button>
                             </div>

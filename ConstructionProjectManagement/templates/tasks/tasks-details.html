@@ -5,36 +5,31 @@
                 <article class="top">
                      <div class="register-form form">
                         <h2 class="project-details">Tasks and report</h2>
-                        <div class="context">
-                            <p class="content-p">Gazoprovod Europ Africakjkjhkjkhk jhhhhhhhhh </p>
-                            <p class="author">Author: Ivan Ivanov Position: Technical manager</p>
-                            <p class="author">Company: Stroitel AD Created at 22.2.2024 15:30</p>
-                        </div>
                         <!-- <form class="" method="" action=""> -->
-                        <h3 class="project-head">Report 1</h3>
+                        <h3 class="project-head">Task {{ task.pk }}</h3>
                         <div class="context">
-                            <p class="content-p">This is report hkhkkkhkhhkhk oioiuouou[09klj poiupoioiikjk</p>
-                            <p class="author">Reporter: Ivan Ivanov Position: Technical manager</p>
-                            <p class="author">Company: Stroitel AD Reported at 22.2.2024 15:30</p>
+                            <p class="content-p">{{ task.description }}</p>
+                            <p class="author">Author: {{ task.author.profile.profiles_name }} Position: {{ task.author.profile.position }}</p>
+                            <p class="author">Company: {{ task.author.profile.company_job }} Reported at {{ task.date_approved|date:'d-m-Y' }}</p>
                             <div class="report-a">
-                                <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                                <a href="{% url 'task-edit' pk=task.pk %}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a href="{% url 'task-delete' pk=task.pk %}"><i class="fa-regular fa-trash-can"></i></a>
                             </div>
                         </div>
-                        <h3 class="project-head">Report 2</h3>
-                        <div class="context">
-                                <p class="content-p">This is report hkhkkkhkhhkhk oioiuouou[09klj poiupoioiikjk</p>
-                                <p class="author">Reporter: Ivan Ivanov Position: Technical manager</p>
-                                <p class="author">Company: Stroitel AD Reported at 22.2.2024 15:30</p>
-                            <div class="report-a">
-                                <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a href="#"><i class="fa-regular fa-trash-can"></i></a>
-                            </div>
-                        </div>
+                                <h3 class="project-details">Reports</h3>
+                                 {% for report in task.reports.all %}
+                                <ul class="list">
+                                   <li>
+                                       <a href="{% url 'report-detail' rep_pk=report.pk %}" class="see-more">Reporter{{ report.reporter.profile.profiles_name }}</a>
+                                   </li>
+                                </ul>
+                                 {% empty %}
+                                <div class="project-head"><h3>No Reports added</h3></div>
+                                 {% endfor %}
+                                <div class="button">
+                                    <button><a href="{% url 'report-add' %}?task_id={{ task.pk }}">Add for this Task</a></button>
+                                </div>
                         <!-- </form> -->
-                        <div class="button">
-                           <button type="submit">Create report</button>
-                        </div>
                      </div>
                 </article>
         </main>

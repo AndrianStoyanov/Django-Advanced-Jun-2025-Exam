@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <main>
+                <article class="top">
+                     <div class="register-form form">
+                        <h2 class="project-details">Reports</h2>
+                         {% for report in report_list %}
+                        <ul class="list">
+                           <li>
+                               <a href="{% url 'report-detail' rep_pk=report.pk %}" class="see-more">Reporter{{ report.reporter.profile.profiles_name }}</a>
+                           </li>
+                        </ul>
+                         {% empty %}
+                        <div class="project-head"><h3>No Reports added</h3></div>
+                         {% endfor %}
+                        <div class="button">
+                           <button><a href="{% url 'report-add' %}">Add</a></button>
+                        </div>
+                     </div>
+                </article>
+        </main>
+{% endblock %}

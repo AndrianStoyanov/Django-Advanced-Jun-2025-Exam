@@ -5,27 +5,18 @@
                 <article class="top">
                      <div class="register-form form">
                         <h2 class="project-details">Tasks</h2>
-                        <ul class="list">
-                           <li>
-                               <a href="#" class="see-more">Task 1</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Task 2</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Task 3</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Task 4</a>
-                           </li>
-                           <li>
-                               <a href="#" class="see-more">Task 5</a>
-                           </li>
-                        </ul>
-                        <div class="project-head"><h3>No tasks added</h3></div>
-                        <div class="button">
-                           <button type="submit">Add</button>
-                        </div>
+                         {% for task in task_list %}
+                            <ul class="list">
+                               <li type="none">
+                                   <a href="{% url 'task-detail' pk=task.pk %}" class="see-more">Task {{ task.author.profile.position }}</a>
+                               </li>
+                            </ul>
+                         {% empty %}
+                            <div class="project-head"><h3>No tasks added</h3></div>
+                         {% endfor %}
+                            <div class="button">
+                               <button><a href="{% url 'task-create' %}">Add</a></button>
+                            </div>
                      </div>
                 </article>
         </main>

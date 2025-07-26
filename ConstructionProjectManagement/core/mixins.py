@@ -48,3 +48,27 @@ class ContractBaseForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'placeholder': 'Enter email'}),
             'document': forms.FileInput(),
         }
+
+
+class TaskBaseForm(forms.ModelForm):
+    class Meta:
+        labels = {
+            'description': 'Description:',
+            'date_approved': 'Date approved:',
+        }
+        widgets = {
+            'description': forms.Textarea(attrs={'placeholder': 'Enter description'}),
+            'date_approved': forms.DateTimeInput(),
+        }
+
+
+class ReportBaseForm(forms.ModelForm):
+    class Meta:
+        labels = {
+            'answer': 'Answer:',
+            'date_report': 'Date reported:',
+        }
+        widgets = {
+            'answer': forms.Textarea(attrs={'placeholder': 'Enter answer'}),
+            'date_report': forms.DateTimeInput(),
+        }

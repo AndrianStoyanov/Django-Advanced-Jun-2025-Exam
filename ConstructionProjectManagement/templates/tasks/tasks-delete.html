@@ -5,12 +5,14 @@
                 <article class="top">
                     <div class="register-form form">
                        <h2 class="project-details">Delete Task</h2>
-                       <form class="" method="" action="">
-                            <div class="context">
-                                <p class="content-p">Gazoprovod Europ Africakjkjhkjkhk jhhhhhhhhh </p>
-                                <p class="author">Author: Ivan Ivanov Position: Technical manager</p>
-                                <p class="author">Company: Stroitel AD Created at 22.2.2024 15:30</p>
-                            </div>
+                       <form class="" method="POST" action="{% url 'task-delete' pk=task.pk %}">
+                           {% csrf_token %}
+                           {{ form }}
+{#                            <div class="context">#}
+{#                                <p class="content-p">Gazoprovod Europ Africakjkjhkjkhk jhhhhhhhhh </p>#}
+{#                                <p class="author">Author: Ivan Ivanov Position: Technical manager</p>#}
+{#                                <p class="author">Company: Stroitel AD Created at 22.2.2024 15:30</p>#}
+{#                            </div>#}
                             <div class="button">
                                 <button type="submit">Delete</button>
                             </div>

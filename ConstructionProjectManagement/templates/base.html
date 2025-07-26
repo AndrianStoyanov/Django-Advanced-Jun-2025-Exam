@@ -23,10 +23,9 @@
                 <div class="customer">
                     <a href="{% url 'projects' %}">Projects</a>
                     <a href="{% url 'project-create' %}">Create project</a>
+                    <a href="{% url 'tasks' %}">Tasks</a>
                 </div>
                 <div class="profile">
-{#                    <a href="{% url 'login' %}" id="log"><i class="fa-solid fa-user"></i></a>#}
-{#                    <a href="{% url 'logout' %}" id="log">Log out</a>#}
                     {% if user.is_authenticated %}
                         <form class="logout-form" action="{% url 'logout' %}" method="POST">
                             {% csrf_token %}

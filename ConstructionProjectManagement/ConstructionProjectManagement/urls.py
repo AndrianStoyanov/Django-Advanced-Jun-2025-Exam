@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('designers/', include('designers.urls')),
     path('supervisions/', include('supervisions.urls')),
-
+    path('tasks/', include('tasks.urls')),
 ]
 
 if settings.DEBUG:
