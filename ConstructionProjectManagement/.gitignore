@@ -1,1 +1,11 @@
+# Ignore the .env file with sensitive information
 .env
+
+# Ignore the virtual environment
+venv/
+
+# Ignore IDE-specific settings
+.idea/
+
+# Ignore database file
+db.sqlite3
