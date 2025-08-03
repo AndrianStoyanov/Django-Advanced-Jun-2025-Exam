@@ -34,7 +34,7 @@ class CreateProjectView(LoginRequiredMixin, CreateView):
         )
 
 
-class DetailsProjectView(DetailView):
+class DetailsProjectView(LoginRequiredMixin, DetailView):
     model = Project
     template_name = 'projects/projects-details.html'
     pk_url_kwarg = 'pro_pk'

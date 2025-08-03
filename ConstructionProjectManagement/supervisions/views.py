@@ -9,7 +9,7 @@ from supervisions.models import Supervision
 
 
 # Create your views here.
-class SupervisionListView(ListView):
+class SupervisionListView(LoginRequiredMixin, ListView):
     model = Supervision
     template_name = 'supervision/supervisions.html'
 
@@ -28,7 +28,7 @@ class SupervisionCreateView(LoginRequiredMixin, CreateView):
         )
 
 
-class SupervisionDetailView(DetailView):
+class SupervisionDetailView(LoginRequiredMixin, DetailView):
     model = Supervision
     template_name = 'supervision/supervision-details.html'
     pk_url_kwarg = 'pk'

@@ -11,20 +11,13 @@ class AppUserManager(BaseUserManager):
         if not username:
             raise ValueError("The given username must be set")
         email = self.normalize_email(email)
-        # Lookup the real model class from the global app registry so this
-        # manager method can be used in migrations. This is fine because
-        # managers are by definition working on the real model.
-        GlobalUserModel = apps.get_model(self.model._meta.app_label,
-                                         self.model._meta.object_name)
+        GlobalUserModel = apps.get_model(self.model._meta.app_label, self.model._meta.object_name)
         username = GlobalUserModel.normalize_username(username)
         user = self.model(username=username, email=email, **extra_fields)
         user.password = make_password(password)
         return user
 
     def _create_user(self, username, email, password, **extra_fields):
-        """
-        Create and save a user with the given username, email, and password.
-        """
         user = self._create_user_object(username, email, password, **extra_fields)
         user.save(using=self._db)
         return user
@@ -49,9 +42,7 @@ class AppUserManager(BaseUserManager):
 
     create_superuser.alters_data = True
 
-    def with_perm(
-        self, perm, is_active=True, include_superusers=True, backend=None, obj=None
-    ):
+    def with_perm(self, perm, is_active=True, include_superusers=True, backend=None, obj=None):
         if backend is None:
             backends = auth._get_backends(return_tuples=True)
             if len(backends) == 1:

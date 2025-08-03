@@ -23,7 +23,7 @@ class NewAccountView(CreateView):
             login(self.request, self.object)
 
         return response
-    # signals
+    # function in signals.py receiver signal to create a new profile form without data when a new user is created !!!
 
 
 class DetailProfileView(LoginRequiredMixin, DetailView):

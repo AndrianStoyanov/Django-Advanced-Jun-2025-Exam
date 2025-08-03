@@ -12,7 +12,7 @@ UserModel = get_user_model()
 
 @admin.register(UserModel)
 class AppUserAdmin(UserAdmin):
-    list_display = ('email', 'is_active', 'is_staff')
+    list_display = ('email', 'is_active', 'is_staff',)
     form = AppUserChangeForm
     add_form = AppUserCreationForm
 
@@ -48,4 +48,6 @@ class AppUserAdmin(UserAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    ...
+    list_display = ['profiles_name', 'position', 'company_job']
+    ordering = ('company_job', 'position')
+    search_fields = ('company_job', 'position', 'first_name', 'last_name')

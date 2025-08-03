@@ -9,7 +9,7 @@ from designers.models import Designer
 # Create your views here.
 
 
-class DesignerListView(ListView):
+class DesignerListView(LoginRequiredMixin, ListView):
     model = Designer
     template_name = 'designer/designers.html'
 
@@ -28,7 +28,7 @@ class DesignerCreateView(LoginRequiredMixin, CreateView):
         )
 
 
-class DesignerDetailView(DetailView):
+class DesignerDetailView(LoginRequiredMixin, DetailView):
     model = Designer
     template_name = 'designer/designer-details.html'
     pk_url_kwarg = 'pk'

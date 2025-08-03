@@ -10,7 +10,7 @@ from tasks.models import Task, Report
 
 # Create your views here.
 # Views for Tasks
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'tasks/tasks.html'
 
@@ -30,7 +30,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         return reverse('tasks')
 
 
-class TaskDetailView(DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = 'tasks/tasks-details.html'
     pk_url_kwarg = 'pk'
@@ -110,7 +110,7 @@ class ReportCreateView(LoginRequiredMixin, CreateView):
         return reverse('task-detail', kwargs={'pk': self.object.task.pk})
 
 
-class ReportDetailView(DetailView):
+class ReportDetailView(LoginRequiredMixin, DetailView):
     model = Report
     template_name = 'tasks/report-detail.html'
     pk_url_kwarg = 'rep_pk'

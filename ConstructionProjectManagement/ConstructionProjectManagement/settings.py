@@ -9,11 +9,10 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 
 from django.urls import reverse_lazy
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+SECRET_KEY = config('SECRET_KEY', None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', None, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -86,7 +85,7 @@ WSGI_APPLICATION = 'ConstructionProjectManagement.wsgi.application'
 
 AUTHENTICATION_BACKENDS = [
     'accounts.authentication.CustomAuthBackend',  # try to authenticate with email
-    # 'django.contrib.auth.backends.ModelBackend',  # fallback to authenticate with username
+    'django.contrib.auth.backends.ModelBackend',  # fallback to authenticate with username
 ]
 
 # Database
@@ -95,11 +94,11 @@ AUTHENTICATION_BACKENDS = [
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django_advanced_exam",
-        "USER": "postgres",
-        "PASSWORD": "",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": config('NAME', ''),
+        "USER": config('USER', ''),
+        "PASSWORD": config('PASSWORD', ''),
+        "HOST": config('HOST', ''),
+        "PORT": config('PORT', ''),
     }
 }
 
@@ -141,8 +140,9 @@ USE_I18N = True
 
 USE_TZ = True
 
-# CSRF_COOKIE_SECURE = True  # only https sending
-# CSRF_COOKIE_HTTPONLY = True   # can't get it with document.cookie
+CSRF_COOKIE_SECURE = True  # only https sending
+CSRF_COOKIE_HTTPONLY = True   # can't get it with document.cookie
+SESSION_COOKIE_SECURE = True
 
 
 # Static files (CSS, JavaScript, Images)

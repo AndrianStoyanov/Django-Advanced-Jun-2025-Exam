@@ -9,7 +9,7 @@ from builders.models import Builder
 
 
 # Create your views here.
-class BuilderListView(ListView):
+class BuilderListView(LoginRequiredMixin, ListView):
     model = Builder
     template_name = 'builder/builders.html'
 
@@ -28,7 +28,7 @@ class BuilderCreateView(LoginRequiredMixin, CreateView):
         )
 
 
-class BuilderDetailView(DetailView):
+class BuilderDetailView(LoginRequiredMixin, DetailView):
     model = Builder
     template_name = 'builder/builder-details.html'
     pk_url_kwarg = 'pk'
