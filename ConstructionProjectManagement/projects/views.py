@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls.base import reverse_lazy, reverse
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
@@ -17,7 +17,8 @@ class ProjectPageView(ListView):
     template_name = 'projects/projects-page.html'
 
 
-class CreateProjectView(LoginRequiredMixin, CreateView):
+class CreateProjectView(PermissionRequiredMixin, CreateView):
+    permission_required = 'projects.add_project'
     model = Project
     template_name = 'projects/projects-create.html'
     form_class = ProjectCreateForm
@@ -53,7 +54,8 @@ class DetailsProjectView(LoginRequiredMixin, DetailView):
         return super().get_context_data(**kwargs)
 
 
-class EditProjectView(LoginRequiredMixin, UpdateView):
+class EditProjectView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'projects.change_project'
     model = Project
     form_class = ProjectEditForm
     template_name = 'projects/projects-edit.html'
@@ -65,7 +67,8 @@ class EditProjectView(LoginRequiredMixin, UpdateView):
         )
 
 
-class DeleteProjectView(LoginRequiredMixin, DeleteView):
+class DeleteProjectView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'projects.delete_project'
     model = Project
     form_class = ProjectDeleteForm
     template_name = 'projects/projects-delete.html'

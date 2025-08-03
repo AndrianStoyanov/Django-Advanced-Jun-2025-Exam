@@ -18,6 +18,8 @@
                        <div class="context">+{{ designer.phone_number }}</div>
                        <h3 class="project-head">Email:</h3>
                        <div class="context">{{ designer.email}}</div>
+                        <h3 class="project-head">Project:</h3>
+                        <div class="context">{{ designer.project.all|join:', '|default:'N/A'}}</div>
                    </form>
                    <div class="button">
                       <button><a href="{% url 'designer-edit' pk=designer.pk %}">Edit</a></button>

@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model, login
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
@@ -32,7 +32,8 @@ class DetailProfileView(LoginRequiredMixin, DetailView):
     pk_url_kwarg = 'pk'
 
 
-class EditProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class EditProfileView(UserPassesTestMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = 'accounts.change_profile'
     model = Profile
     form_class = ProfileEditForm
     template_name = 'accounts/profile-edit.html'
@@ -57,7 +58,8 @@ class EditProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         )
 
 
-class DeleteProfileView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeleteProfileView(PermissionRequiredMixin, UserPassesTestMixin, DeleteView):
+    permission_required = 'accounts.delete_profile'
     model = Profile
     template_name = 'accounts/profile-delete.html'
     success_url = reverse_lazy('home')

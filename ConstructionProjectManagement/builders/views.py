@@ -1,4 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.urls.base import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -14,7 +15,8 @@ class BuilderListView(LoginRequiredMixin, ListView):
     template_name = 'builder/builders.html'
 
 
-class BuilderCreateView(LoginRequiredMixin, CreateView):
+class BuilderCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = "builders.add_builder"
     model = Builder
     template_name = 'builder/builder-add.html'
     form_class = BuilderCreateForm
@@ -39,11 +41,12 @@ class BuilderDetailView(LoginRequiredMixin, DetailView):
         return super().get_context_data(**kwargs)
 
 
-class BuilderEditView(LoginRequiredMixin, UpdateView):
+class BuilderEditView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'builders.edit_builder'
     model = Builder
+    form_class = BuilderEditForm
     template_name = 'builder/builder-edit.html'
     pk_url_kwarg = 'pk'
-    form_class = BuilderEditForm
 
     def get_success_url(self) -> str:
         return reverse('builder-details', kwargs={'pk': self.object.pk})

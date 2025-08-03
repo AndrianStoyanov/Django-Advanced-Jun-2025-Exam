@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls.base import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
@@ -14,7 +14,8 @@ class DesignerListView(LoginRequiredMixin, ListView):
     template_name = 'designer/designers.html'
 
 
-class DesignerCreateView(LoginRequiredMixin, CreateView):
+class DesignerCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = 'designers.add_designer'
     model = Designer
     template_name = 'designer/designer-add.html'
     form_class = DesignerCreateForm
@@ -39,7 +40,8 @@ class DesignerDetailView(LoginRequiredMixin, DetailView):
         return super().get_context_data(**kwargs)
 
 
-class DesignerEditView(LoginRequiredMixin, UpdateView):
+class DesignerEditView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'designers.change_designer'
     model = Designer
     template_name = 'designer/designer-edit.html'
     pk_url_kwarg = 'pk'

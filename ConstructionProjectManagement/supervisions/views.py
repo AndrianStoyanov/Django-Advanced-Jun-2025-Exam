@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls.base import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
@@ -14,7 +14,8 @@ class SupervisionListView(LoginRequiredMixin, ListView):
     template_name = 'supervision/supervisions.html'
 
 
-class SupervisionCreateView(LoginRequiredMixin, CreateView):
+class SupervisionCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = 'supervisions.add_supervision'
     model = Supervision
     template_name = 'supervision/supervision-add.html'
     form_class = SupervisionCreateForm
@@ -39,7 +40,8 @@ class SupervisionDetailView(LoginRequiredMixin, DetailView):
         return super().get_context_data(**kwargs)
 
 
-class SupervisionEditView(LoginRequiredMixin, UpdateView):
+class SupervisionEditView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'supervisions.change_supervision'
     model = Supervision
     template_name = 'supervision/supervision-edit.html'
     pk_url_kwarg = 'pk'

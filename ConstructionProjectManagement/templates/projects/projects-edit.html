@@ -12,11 +12,11 @@
                                 <button type="submit">Edit</button>
                             </div>
                         </form>
-                        <a href="#" class="see-more project-head"><h3>Edit Builder</h3></a>
+                        <a href="{% url 'builders' %}" class="see-more project-head"><h3>Edit Builders</h3></a>
                         <div class="context">{{ project.builders.all|join:', ' |default:'N/A'}}</div>
-                        <a href="#" class="see-more project-head"><h3>Edit Designer</h3></a>
+                        <a href="{% url 'designers' %}" class="see-more project-head"><h3>Edit Designers</h3></a>
                         <div class="context">{{ project.designers.all|join:', ' |default:'N/A' }}</div>
-                        <a href="#" class="see-more project-head"><h3>Edit Supervision</h3></a>
+                        <a href="{% url 'supervisions' %}" class="see-more project-head"><h3>Edit Supervisions</h3></a>
                         <div class="context">{{ project.supervisions.all|join:', ' |default:'N/A' }}</div>
                     </div>
                 </article>

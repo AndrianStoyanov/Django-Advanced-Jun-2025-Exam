@@ -1,4 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.urls.base import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -10,12 +11,14 @@ from tasks.models import Task, Report
 
 # Create your views here.
 # Views for Tasks
-class TaskListView(LoginRequiredMixin, ListView):
+class TaskListView(PermissionRequiredMixin, ListView):
+    permission_required = 'tasks.view_task'
     model = Task
     template_name = 'tasks/tasks.html'
 
 
-class TaskCreateView(LoginRequiredMixin, CreateView):
+class TaskCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = 'tasks.add_task'
     model = Task
     template_name = 'tasks/tasks-create.html'
     form_class = TaskCreateForm
@@ -30,7 +33,8 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         return reverse('tasks')
 
 
-class TaskDetailView(LoginRequiredMixin, DetailView):
+class TaskDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'tasks.view_task'
     model = Task
     template_name = 'tasks/tasks-details.html'
     pk_url_kwarg = 'pk'
@@ -41,7 +45,8 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
         return super().get_context_data(**kwargs)
 
 
-class TaskEditView(LoginRequiredMixin, UpdateView):
+class TaskEditView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'tasks.change_task'
     model = Task
     template_name = 'tasks/tasks-edit.html'
     pk_url_kwarg = 'pk'
@@ -51,7 +56,8 @@ class TaskEditView(LoginRequiredMixin, UpdateView):
         return reverse('task-detail', kwargs={'pk': self.object.pk})
 
 
-class TaskDeleteView(LoginRequiredMixin, DeleteView):
+class TaskDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'tasks.delete_task'
     model = Task
     template_name = 'tasks/tasks-delete.html'
     pk_url_kwarg = 'pk'
@@ -86,7 +92,8 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 #
 #     def get_success_url(self):
 #         return reverse('tasks')
-class ReportCreateView(LoginRequiredMixin, CreateView):
+class ReportCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = 'tasks.add_report'
     model = Report
     template_name = 'tasks/report-create.html'
     form_class = ReportCreateForm
@@ -102,7 +109,6 @@ class ReportCreateView(LoginRequiredMixin, CreateView):
                 self.object.task = task
             except Task.DoesNotExist:
                 pass
-
         self.object.save()
         return super().form_valid(form)
 
@@ -110,7 +116,8 @@ class ReportCreateView(LoginRequiredMixin, CreateView):
         return reverse('task-detail', kwargs={'pk': self.object.task.pk})
 
 
-class ReportDetailView(LoginRequiredMixin, DetailView):
+class ReportDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'tasks.view_report'
     model = Report
     template_name = 'tasks/report-detail.html'
     pk_url_kwarg = 'rep_pk'
@@ -121,17 +128,27 @@ class ReportDetailView(LoginRequiredMixin, DetailView):
         return super().get_context_data(**kwargs)
 
 
-class ReportEditView(LoginRequiredMixin, UpdateView):
+class ReportEditView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'tasks.change_report'
     model = Report
     template_name = 'tasks/report-edit.html'
     pk_url_kwarg = 'rep_pk'
     form_class = ReportEditForm
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        if self.object.reporter == self.request.user:
+            self.object.save()
+            return super().form_valid(form)
+        else:
+            raise PermissionDenied
+
     def get_success_url(self):
         return reverse('report-detail', kwargs={'rep_pk': self.object.pk})
 
 
-class ReportDeleteView(LoginRequiredMixin, DeleteView):
+class ReportDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'tasks.delete_report'
     model = Report
     template_name = 'tasks/report-delete.html'
     pk_url_kwarg = 'rep_pk'
