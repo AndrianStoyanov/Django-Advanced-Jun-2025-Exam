@@ -20,8 +20,8 @@ class NewAccountView(CreateView):
         response = super().form_valid(form)
 
         if response.status_code in [301, 302]:
+            self.object.backend = 'django.contrib.auth.backends.ModelBackend'
             login(self.request, self.object)
-
         return response
     # function in signals.py receiver signal to create a new profile form without data when a new user is created !!!
 

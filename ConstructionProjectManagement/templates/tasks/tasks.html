@@ -8,7 +8,7 @@
                          {% for task in task_list %}
                             <ul class="list">
                                <li type="none">
-                                   <a href="{% url 'task-detail' pk=task.pk %}" class="see-more">Task {{ task.author.profile.position }}</a>
+                                   <a href="{% url 'task-detail' pk=task.pk %}" class="see-more">Task {{ task.project }}</a>
                                </li>
                             </ul>
                          {% empty %}

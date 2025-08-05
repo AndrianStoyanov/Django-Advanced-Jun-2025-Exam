@@ -17,6 +17,9 @@ class Task(models.Model):
     date_approved = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tasks')
 
+    def __str__(self):
+        return self.project.title
+
 
 class Report(models.Model):
     answer = models.TextField()

@@ -6,7 +6,7 @@
                      <div class="register-form form">
                         <h2 class="project-details">Tasks and report</h2>
                         <!-- <form class="" method="" action=""> -->
-                        <h3 class="project-head">Task {{ task.pk }}</h3>
+                        <h3 class="project-head">Task {{ task.project.title }}</h3>
                         <div class="context">
                             <p class="content-p">{{ task.description }}</p>
                             <p class="author">Author: {{ task.author.profile.profiles_name }} Position: {{ task.author.profile.position }}</p>
@@ -20,7 +20,7 @@
                                  {% for report in task.reports.all %}
                                 <ul class="list">
                                    <li>
-                                       <a href="{% url 'report-detail' rep_pk=report.pk %}" class="see-more">Reporter{{ report.reporter.profile.profiles_name }}</a>
+                                       <a href="{% url 'report-detail' rep_pk=report.pk %}" class="see-more">Reporter {{ report.reporter.profile.profiles_name }}</a>
                                    </li>
                                 </ul>
                                  {% empty %}
